@@ -37,9 +37,13 @@
     <v-divider class="my-6" />
 
     <!-- Resumo dos dados antes de finalizar -->
-    <v-card variant="tonal" color="primary" rounded="lg" class="mb-6 pa-4">
-      <div class="text-subtitle-2 font-weight-bold mb-3">
-        <v-icon size="16" class="mr-1">mdi-eye-outline</v-icon>
+    <v-card 
+      variant="outlined" 
+      rounded="lg" 
+      class="mb-6 pa-4 summary-card"
+    >
+      <div class="text-subtitle-2 font-weight-bold mb-3" style="color: #3B82F6">
+        <v-icon size="16" class="mr-1" color="primary">mdi-eye-outline</v-icon>
         Resumo do cadastro
       </div>
       <v-row dense>
@@ -74,26 +78,29 @@
       </v-row>
     </v-card>
 
-    <v-row>
-      <v-col cols="12" class="d-flex justify-space-between">
+    <v-row no-gutters class="pt-6">
+      <v-col cols="12" sm="6" order="2" order-sm="1" class="pr-sm-2">
         <v-btn
           variant="outlined"
           color="primary"
           size="large"
           prepend-icon="mdi-arrow-left"
           :disabled="loading"
+          block
           @click="emit('back')"
         >
           Voltar
         </v-btn>
+      </v-col>
+      <v-col cols="12" sm="6" order="1" order-sm="2" class="mb-3 pl-sm-2">
         <v-btn
           type="submit"
-          color="success"
+          color="primary"
           size="large"
           :loading="loading"
           :disabled="loading"
           append-icon="mdi-check"
-          min-width="180"
+          block
         >
           Finalizar Inscrição
         </v-btn>
@@ -174,16 +181,19 @@ async function handleSubmit() {
   flex-direction: column;
   margin-bottom: 8px;
 }
+.summary-card {
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
 .summary-item .label {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: rgba(0,0,0,0.5);
+  opacity: 0.6;
 }
 .summary-item .value {
   font-size: 14px;
-  color: rgba(0,0,0,0.85);
   font-weight: 500;
 }
 </style>

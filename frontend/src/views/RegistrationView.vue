@@ -2,16 +2,28 @@
   <v-container class="py-8 px-4" style="max-width: 780px;">
 
     <!-- Header do evento -->
-    <div class="event-header mb-8 text-center">
-      <div class="brand-badge mb-3">
-        <v-icon color="primary" size="20">mdi-lightning-bolt</v-icon>
-        <span>Evento Exclusivo Intelia</span>
+    <div class="event-header mb-8">
+      <!-- Faixa -->
+      <div class="logo-bar">
+        <img
+          src="https://i.postimg.cc/9XkMTy8g/97-33-logo-Prancheta-1.png"
+          alt="Intelia"
+          style="width: 97px; height: 33px; object-fit: contain;"
+        />
+        <div class="brand-badge">
+          <v-icon color="primary" size="16">mdi-lightning-bolt</v-icon>
+          <span>Evento Exclusivo Intelia</span>
+        </div>
       </div>
-      <h1 class="event-title">
-        Utilizando as soluções da Intelia para
-        <span class="highlight">vender mais</span>
-        pelo telefone e WhatsApp
-      </h1>
+
+      <!-- Título -->
+      <div class="text-center mt-6 px-4">
+        <h1 class="event-title">
+          Utilizando as soluções da Intelia para
+          <span class="highlight">vender mais</span>
+          pelo telefone e WhatsApp
+        </h1>
+      </div>
     </div>
 
     <!-- Card principal -->
@@ -47,15 +59,26 @@
         variant="tonal"
         rounded="0"
         density="compact"
+        :icon="false"
         class="px-6"
-        icon="mdi-information-outline"
       >
-        Bem-vindo de volta! Encontramos seu cadastro anterior. Continue de onde parou.
-        <template #append>
-          <v-btn size="x-small" variant="text" @click="handleReset">
+        <div class="d-flex align-center justify-space-between w-100" style="gap: 16px;">
+          <div class="d-flex align-center" style="gap: 10px;">
+            <v-icon size="18" color="info">mdi-information-outline</v-icon>
+            <span style="font-size: 13px; font-weight: 500;">
+              Bem-vindo de volta! Encontramos seu cadastro anterior. Continue de onde parou.
+            </span>
+          </div>
+          <v-btn
+            size="small"
+            variant="tonal"
+            color="info"
+            style="flex-shrink: 0;"
+            @click="handleReset"
+          >
             Recomeçar
           </v-btn>
-        </template>
+        </div>
       </v-alert>
 
       <!-- Erro de API -->
@@ -82,7 +105,7 @@
 
         <!-- Título do passo atual -->
         <div class="step-content-header mb-6">
-          <v-icon :color="steps[currentStep - 1]?.color" size="28" class="mr-2">
+          <v-icon :color="steps[currentStep - 1]?.color" size="40" class="mr-2">
             {{ steps[currentStep - 1]?.icon }}
           </v-icon>
           <div>
@@ -194,14 +217,30 @@ async function handleReset() {
 <style scoped>
 .event-header { }
 
+.logo-bar {
+  background: #111827 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 14px 24px;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+}
+
 .brand-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #EEF2FF;
-  color: #1A56DB;
+  background: rgba(37, 99, 235, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: #93C5FD;
   border-radius: 999px;
-  padding: 4px 14px;
+  padding: 4px 12px;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -211,14 +250,25 @@ async function handleReset() {
   font-size: clamp(1.3rem, 3vw, 1.75rem);
   font-weight: 800;
   line-height: 1.3;
-  color: #111827;
   max-width: 600px;
   margin: 0 auto;
 }
 
-.event-title .highlight {
-  color: #1A56DB;
-  position: relative;
+.event-title .highlight { color: #2563EB; }
+
+.intelia-logo-wrap {
+  display: inline-block;
+  background: #111827;
+  border-radius: 12px;
+  padding: 10px 20px;
+  margin-bottom: 16px;
+}
+
+.intelia-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 /* Stepper customizado */
