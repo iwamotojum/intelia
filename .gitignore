@@ -1,0 +1,8 @@
+# Sistema
+.DS_Store
+*.swp
+.env
+.env.local
+
+# Docker
+*.log
