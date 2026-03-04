@@ -140,7 +140,6 @@ class PhoneInput extends HTMLElement {
           padding: 12px 0;
           width: 100%;
           letter-spacing: 0.5px;
-          color-scheme: light dark;
         }
         input::placeholder { color: rgba(var(--v-theme-on-surface, 17 24 39), 0.4); }
         .helper {
