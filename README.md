@@ -178,6 +178,28 @@ CREATE DATABASE intelia_development;
 
 ---
 
+## Testes
+
+Os testes do frontend utilizam [Vitest](https://vitest.dev/) com sintaxe idêntica ao Jest.
+
+```bash
+# Entrar no container do frontend
+docker exec -ti intelia-frontend-1 /bin/sh
+
+# Rodar os testes
+npm test
+```
+
+Cobertura atual: **52 testes** distribuídos em 3 arquivos:
+
+| Arquivo                  | O que testa                                      |
+|--------------------------|--------------------------------------------------|
+| `tests/useMask.test.js`  | Máscaras e conversões de data (`useMask`)        |
+| `tests/schemas.test.js`  | Validações Yup dos 3 passos                      |
+| `tests/store.test.js`    | `init`, `saveStep` e `clearSession` (Pinia)      |
+
+---
+
 ## Comandos úteis
 
 ```bash
