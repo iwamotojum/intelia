@@ -5,13 +5,16 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run --reporter=verbose",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
-    "@vee-validate/yup": "^4.12.0",
     "axios": "^1.6.0",
     "pinia": "^2.1.7",
-    "vee-validate": "^4.12.0",
     "vue": "^3.4.0",
     "vue-router": "^4.2.5",
     "vuetify": "^3.4.0",
@@ -21,6 +24,11 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",
     "vite": "^5.0.0",
-    "vite-plugin-vuetify": "^2.0.0"
+    "vite-plugin-vuetify": "^2.0.0",
+    "vitest": "^1.4.0",
+    "@vitest/coverage-v8": "^1.4.0",
+    "@vue/test-utils": "^2.4.0",
+    "jsdom": "^24.0.0",
+    "@playwright/test": "^1.42.0"
   }
 }
