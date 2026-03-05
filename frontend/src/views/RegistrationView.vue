@@ -27,7 +27,7 @@
     </div>
 
     <!-- Card principal -->
-    <v-card elevation="2" rounded="xl" class="overflow-hidden">
+    <v-card ref="cardRef" elevation="2" rounded="xl" class="overflow-hidden">
 
       <!-- Stepper Header -->
       <div class="stepper-header">
@@ -124,24 +124,24 @@
             v-if="currentStep === 1"
             key="step1"
             :initial="store.formData"
-            :loading="store.loading"
+            :loading="store.saving"
             @next="handleNext"
           />
           <StepTwo
             v-else-if="currentStep === 2"
             key="step2"
             :initial="store.formData"
-            :loading="store.loading"
+            :loading="store.saving"
             @next="handleNext"
-            @back="currentStep--"
+            @back="goBack"
           />
           <StepThree
             v-else-if="currentStep === 3"
             key="step3"
             :initial="store.formData"
-            :loading="store.loading"
+            :loading="store.saving"
             @next="handleNext"
-            @back="currentStep--"
+            @back="goBack"
           />
         </Transition>
       </div>
@@ -170,6 +170,7 @@ const store  = useRegistrationStore()
 const { dateToISO } = useMask()
 
 const isResuming = ref(false)
+const cardRef    = ref(null)   // referência ao card para o scroll
 
 const steps = [
   { name: 'Dados Pessoais', icon: 'mdi-account-outline',   color: 'primary' },
@@ -188,6 +189,13 @@ onMounted(async () => {
   isResuming.value = hadToken && store.currentStep > 1
 })
 
+/** Rola suavemente até o topo do card ao trocar de step */
+function scrollToCard() {
+  const el = cardRef.value?.$el ?? cardRef.value
+  if (!el) return
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
 async function handleNext(stepData) {
   const step = currentStep.value
 
@@ -201,16 +209,22 @@ async function handleNext(stepData) {
 
   if (step < 3) {
     store.currentStep = step + 1
+    scrollToCard()
   } else {
-    // Concluído — redireciona para tela de sucesso
     router.push({ name: 'success' })
   }
+}
+
+function goBack() {
+  store.currentStep--
+  scrollToCard()
 }
 
 async function handleReset() {
   store.clearSession()
   await store.init()
   isResuming.value = false
+  scrollToCard()
 }
 </script>
 

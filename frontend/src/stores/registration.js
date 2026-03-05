@@ -14,6 +14,7 @@ export const useRegistrationStore = defineStore('registration', () => {
   const currentStep  = ref(Number(localStorage.getItem(STORAGE_KEYS.step)) || 1)
   const formData     = ref(_loadData())
   const loading      = ref(false)
+  const saving       = ref(false)
   const apiError     = ref(null)
 
   // ── Getters ──────────────────────────────────────────────────────────────
@@ -60,7 +61,7 @@ export const useRegistrationStore = defineStore('registration', () => {
    * @param {object} stepData
    */
   async function saveStep(step, stepData) {
-    loading.value  = true
+    saving.value  = true
     apiError.value = null
     try {
       const { data } = await registrationService.update(sessionToken.value, step, stepData)
@@ -70,7 +71,7 @@ export const useRegistrationStore = defineStore('registration', () => {
       apiError.value = err.message
       return false
     } finally {
-      loading.value = false
+      saving.value = false
     }
   }
 
@@ -96,8 +97,8 @@ export const useRegistrationStore = defineStore('registration', () => {
   }
 
   return {
-    sessionToken, currentStep, formData, loading, apiError,
-    hasSession, isCompleted,
+    sessionToken, currentStep, formData, loading, saving,
+    apiError, hasSession, isCompleted,
     init, saveStep, clearSession,
   }
 })
